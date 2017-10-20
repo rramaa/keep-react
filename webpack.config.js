@@ -15,6 +15,10 @@ var config = {
 			test : /\.jsx?/,
 			include : APP_DIR,
 			loader : 'babel-loader'
+		}, {
+			test : /\.scss$/,
+			include : APP_DIR,
+			loader : ['style-loader', 'css-loader', 'sass-loader']
 		}]
 	},
 	output: {

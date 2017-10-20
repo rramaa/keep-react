@@ -1,0 +1,19 @@
+.sidebar{
+	float: left;
+	min-width: 200px;
+	padding: 5px;
+
+	.category-input{
+		margin: 5px 0;
+	}
+
+	.category-list{
+		.category-item{
+			cursor: pointer;
+
+			&.selected{
+				background-color: grey;
+			}
+		}
+	}
+}
