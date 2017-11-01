@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import Button from "../components/Button.jsx"
+import Button from "scripts/components/Button"
 
 function _normaliseInput(value){
 	if(value){

@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import Button from "../components/Button.jsx"
-import Note from "../components/Note.jsx"
+import Button from "scripts/components/Button"
+import Note from "scripts/components/Note"
 
 class MainContent extends Component{
 	constructor(props) {

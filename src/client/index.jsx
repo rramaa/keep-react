@@ -1,9 +1,9 @@
 import React, {Component} from "react"
 import {render} from "react-dom"
-import Sidebar from "./scripts/containers/Sidebar.jsx"
-import MainContent from "./scripts/containers/MainContent.jsx"
-import localStorageService from "./scripts/services/localStorageService.js"
-import style from "./style/style.scss"
+import Sidebar from "scripts/containers/Sidebar"
+import MainContent from "scripts/containers/MainContent"
+import localStorageService from "scripts/services/localStorageService"
+import style from "style/style"
 
 const NOTE_KEY = "notes"
 const CATEGORY_KEY = "category"

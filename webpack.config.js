@@ -22,6 +22,10 @@ var config = {
 			loader : ['style-loader', 'css-loader', 'sass-loader']
 		}]
 	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.scss', '.css'],
+		modules: ['node_modules', APP_DIR]
+	},
 	output: {
 		path: BUILD_DIR,
 		filename: 'app.js'
