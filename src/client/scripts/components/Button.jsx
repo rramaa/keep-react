@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 
 class Button extends Component{
 	constructor(props) {
-		super(props);
+		super(props)
 	}
 
 	render(){
@@ -13,8 +13,8 @@ class Button extends Component{
 			  >
 			{this.props.text}
 			</button>
-		);
+		)
 	}
 }
 
-export default Button;
+export default Button

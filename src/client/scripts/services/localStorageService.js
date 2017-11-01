@@ -1,17 +1,17 @@
-let localStorageService = {};
+let localStorageService = {}
 
 localStorageService.getItem = function(key){
-	let item = window.localStorage.getItem(key);
+	let item = window.localStorage.getItem(key)
 	try{
-		item = JSON.parse(item);
+		item = JSON.parse(item)
 	} catch(e){
-		item = {};
+		item = {}
 	}
-	return item;
+	return item
 }
 
 localStorageService.setItem = function(key, value){
-	window.localStorage.setItem(key, JSON.stringify(value));
+	window.localStorage.setItem(key, JSON.stringify(value))
 }
 
-export default localStorageService;
+export default localStorageService
