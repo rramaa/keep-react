@@ -1,12 +1,13 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var BUILD_DIR = path.resolve(__dirname, 'dist');
-var APP_DIR = path.resolve(__dirname, 'src/client');
+var BUILD_DIR = path.resolve(__dirname, 'dist')
+var APP_DIR = path.resolve(__dirname, 'src/client')
 
 var config = {
 	entry: APP_DIR + '/index.jsx',
+	devtool: 'source-map',
 	module: {
 		rules: [{
 			test: /\.html$/,
@@ -29,6 +30,6 @@ var config = {
 		title: "React App",
 		template: APP_DIR + "/index.html"
 	})]
-};
+}
 
-module.exports = config;
+module.exports = config

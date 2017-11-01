@@ -1,22 +1,22 @@
-import React, {Component} from "react";
-import Button from "../components/Button.jsx";
+import React, {Component} from "react"
+import Button from "../components/Button.jsx"
 
 function _normaliseInput(value){
 	if(value){
-		value = value[0].toUpperCase() + value.substring(1);
+		value = value[0].toUpperCase() + value.substring(1)
 	}
-	return value;
+	return value
 }
 
 class Sidebar extends Component{
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			inputValue: ""	
 		}
 
-		this.handleChange = this.handleChange.bind(this);
-		this.onCategorySubmit = this.onCategorySubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this)
+		this.onCategorySubmit = this.onCategorySubmit.bind(this)
 	}
 
 	getCategories({categories, selectedCategory}){
@@ -29,20 +29,20 @@ class Sidebar extends Component{
 					>
 						{v.label}
 					</li>
-				);
-		});
+				)
+		})
 	}
 
 	handleChange(e){
-		let inputValue = _normaliseInput(e.target.value);
+		let inputValue = _normaliseInput(e.target.value)
 		this.setState({
 			inputValue
 		})
 	}
 
 	onCategorySubmit(){
-		let categoryLabel = this.state.inputValue;
-		this.props.onCategoryAdd(categoryLabel);
+		let categoryLabel = this.state.inputValue
+		this.props.onCategoryAdd(categoryLabel)
 		this.setState({
 			inputValue: ""
 		})
@@ -60,8 +60,8 @@ class Sidebar extends Component{
 					{this.getCategories(this.props)}
 				</ul>
 			</div>
-		);
+		)
 	}
 }
 
-export default Sidebar;
+export default Sidebar

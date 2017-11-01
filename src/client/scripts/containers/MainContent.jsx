@@ -1,21 +1,55 @@
-import React, {Component} from "react";
-import Button from "../components/Button.jsx";
+import React, {Component} from "react"
+import Button from "../components/Button.jsx"
+import Note from "../components/Note.jsx"
 
 class MainContent extends Component{
 	constructor(props) {
-		super(props);
+		super(props)
+		this.state = {
+			inputValue: ""
+		}
+		this.handleChange = this.handleChange.bind(this)
+		this.onNoteAddSubmit = this.onNoteAddSubmit.bind(this)
+	}
+
+	handleChange(e){
+		let inputValue = e.target.value
+		this.setState({
+			inputValue
+		})
+	}
+
+	onNoteAddSubmit(){
+		let content = this.state.inputValue
+		let category = this.props.selectedCategory
+		this.props.onNoteAdd({content, category})
+
+		this.setState({
+			inputValue: ""
+		})
+	}
+
+	_getNotes(){
+		if(!this.props.notes){
+			return
+		}
+		return this.props.notes
+		.filter(v => this.props.selectedCategory == 1 || (v.category == this.props.selectedCategory))
+		.map(v => {
+			return (<Note content={v.content} key={v.id} />)
+		})
 	}
 
 	render(){
 		return (<div> 
 			Notes
 			<div className="notes-input">
-				<textarea type="text" onChange={this.handleChange} value={this.inputValue} />
-				<Button text="Submit" onClick={this.onCategorySubmit}/>
+				<textarea type="text" onChange={this.handleChange} value={this.state.inputValue} />
+				<Button text="Submit" onClick={this.onNoteAddSubmit}/>
 			</div>
-			{JSON.stringify(this.props)}
-		</div>);
+			{this._getNotes()}
+		</div>)
 	}
 }
 
-export default MainContent;
+export default MainContent
