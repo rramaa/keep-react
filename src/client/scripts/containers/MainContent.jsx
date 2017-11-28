@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {connect} from 'react-redux'
 import Button from "scripts/components/Button"
 import Note from "scripts/components/Note"
 
@@ -22,7 +23,10 @@ class MainContent extends Component{
 	onNoteAddSubmit(){
 		let content = this.state.inputValue
 		let category = this.props.selectedCategory
-		this.props.onNoteAdd({content, category})
+		this.props.dispatch({
+			type: "NOTE_ADDED",
+			payload: {content, category}
+		})
 
 		this.setState({
 			inputValue: ""
@@ -52,4 +56,11 @@ class MainContent extends Component{
 	}
 }
 
-export default MainContent
+const mapStateToProps = (state) => {
+	return {
+		notes: state.notes,
+		selectedCategory: state.selectedCategory
+	}
+}
+
+export default connect(mapStateToProps)(MainContent)

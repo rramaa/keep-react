@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {connect} from 'react-redux'
 import Button from "scripts/components/Button"
 
 function _normaliseInput(value){
@@ -17,15 +18,16 @@ class Sidebar extends Component{
 
 		this.handleChange = this.handleChange.bind(this)
 		this.onCategorySubmit = this.onCategorySubmit.bind(this)
+		this.onCategoryChange = this.onCategoryChange.bind(this)
 	}
 
 	getCategories({categories, selectedCategory}){
-		return categories.map((v) => {
+		return categories && categories.map((v) => {
 			return (
 					<li
 						key={v.id}
 						className={`category-item ${(v.id == selectedCategory ? "selected": "")}`}
-						onClick={() => this.props.onCategoryChange(v.id)}
+						onClick={() => this.onCategoryChange(v)}
 					>
 						{v.label}
 					</li>
@@ -40,9 +42,19 @@ class Sidebar extends Component{
 		})
 	}
 
+	onCategoryChange(category){
+		this.props.dispatch({
+			type: "CATEGORY_CHANGED",
+			payload: category
+		})
+	}
+
 	onCategorySubmit(){
-		let categoryLabel = this.state.inputValue
-		this.props.onCategoryAdd(categoryLabel)
+		let label = this.state.inputValue
+		this.props.dispatch({
+			type: "CATEGORY_ADDED",
+			payload: label
+		})
 		this.setState({
 			inputValue: ""
 		})
@@ -64,4 +76,11 @@ class Sidebar extends Component{
 	}
 }
 
-export default Sidebar
+let mapStateToProps = (state) => {
+	return {
+		categories: state.categories,
+		selectedCategory: state.selectedCategory
+	}
+}
+
+export default connect(mapStateToProps)(Sidebar)
