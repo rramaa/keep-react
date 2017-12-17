@@ -4,23 +4,25 @@ import {getSelectedCategory, getCategories} from "scripts/services/utilService"
 const NOTE_KEY = "notes"
 const CATEGORY_KEY = "category"
 
+export function getInitialState(){
+	const categories = getCategories(CATEGORY_KEY)
+	const notes = localStorageService.getItem(NOTE_KEY)
+	const selectedCategory = getSelectedCategory()
+	const newState = {
+		notes,
+		categories,
+		selectedCategory
+	}
+	return newState
+}
+
 export default function rootReducer(state={}, {type, payload}){
 	let {categories, notes, selectedCategory} = state
 	let newState = {}
 	switch(type){
-		case "INIT":
-			categories = getCategories(CATEGORY_KEY)
-			notes = localStorageService.getItem(NOTE_KEY)
-			selectedCategory = getSelectedCategory()
-			newState = {
-				notes,
-				categories,
-				selectedCategory
-			}
-			break
 		case "CATEGORY_ADDED":
 			categories.push({
-				id: categories.length + 1,
+				id: categories.length + 2,
 				label: payload
 			})
 			newState = {

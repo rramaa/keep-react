@@ -7,7 +7,6 @@ var APP_DIR = path.resolve(__dirname, 'src/client')
 
 var config = {
 	entry: APP_DIR + '/index.jsx',
-	devtool: 'source-map',
 	module: {
 		rules: [{
 			test: /\.html$/,
