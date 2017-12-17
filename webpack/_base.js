@@ -2,9 +2,13 @@ var webpack = require('webpack')
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var config = (baseDir) => {
+var config = ({baseDir, isDev}) => {
     var BUILD_DIR = path.resolve(baseDir, 'dist')
     var APP_DIR = path.resolve(baseDir, 'src/client')
+    var filename = '[name].[hash].js'
+    if(isDev){
+        filename = '[name].js'
+    }
     return {
         entry: APP_DIR + '/index.jsx',
         module: {
@@ -27,7 +31,7 @@ var config = (baseDir) => {
         },
         output: {
             path: BUILD_DIR,
-            filename: 'app.js'
+            filename
         },
         plugins: [new HtmlWebpackPlugin({
             title: "React App",
