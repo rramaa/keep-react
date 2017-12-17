@@ -14,3 +14,7 @@ export function getCategories(CATEGORY_KEY){
 	}
 	return categories
 }
+
+export function noop(data){
+	return data
+}
