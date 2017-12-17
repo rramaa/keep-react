@@ -46,7 +46,7 @@ class MainContent extends Component{
 
 	render(){
 		return (<div> 
-			Notes
+			Note
 			<div className="notes-input">
 				<textarea type="text" onChange={this.handleChange} value={this.state.inputValue} />
 				<Button text="Submit" onClick={this.onNoteAddSubmit}/>
