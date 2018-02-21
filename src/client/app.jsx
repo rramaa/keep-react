@@ -18,7 +18,7 @@ class ToDo extends Component {
     render() {
         return (
             <div>
-                <div className="sidebar df">
+                <div className="sidebar">
                     <Sidebar />
                 </div>
                 <div className="main-content">

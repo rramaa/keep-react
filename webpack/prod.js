@@ -3,7 +3,8 @@ var baseConfig = require('./_base')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = function (baseDir) {
-    var webpackConfig = baseConfig(baseDir)
+    var webpackConfig = baseConfig({baseDir, isDev: false})
+    webpackConfig
     webpackConfig.plugins = [
         ...webpackConfig.plugins,
         new UglifyJSPlugin({
