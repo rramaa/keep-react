@@ -1,37 +1,32 @@
-import React, { Component } from "react"
-import { render } from "react-dom"
-import Sidebar from "scripts/containers/Sidebar"
-import MainContent from "scripts/containers/MainContent"
-import localStorageService from "scripts/services/localStorageService"
-import style from "style/style"
+import React, { Component } from 'react'
+import Sidebar from 'scripts/containers/Sidebar'
+import MainContent from 'scripts/containers/MainContent'
 import configureStore from 'scripts/services/store'
-import { Provider, connect } from 'react-redux'
+import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom'
 
 let store = configureStore()
 
 class ToDo extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="sidebar">
-                    <Sidebar />
-                </div>
-                <div className="main-content">
-                    <MainContent />
-                </div>
-            </div>
-        )
-    }
+  render () {
+    return (
+      <div>
+        <div className='sidebar'>
+          <Sidebar />
+        </div>
+        <div className='main-content'>
+          <MainContent />
+        </div>
+      </div>
+    )
+  }
 }
 
 const App = (
+  <HashRouter>
     <Provider store={store}>
-        <ToDo />
+      <ToDo />
     </Provider>
+  </HashRouter>
 )
 export default App
