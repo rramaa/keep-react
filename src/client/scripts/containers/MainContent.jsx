@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'scripts/components/Button'
 import Note from 'scripts/components/Note'
+import { getCategoryById } from 'scripts/services//utilService'
+import CONSTANTS from 'scripts/constants'
+import createRoutedComponent from 'scripts/services/RoutingHoc'
 
 class MainContent extends Component {
   constructor (props) {
@@ -21,8 +24,14 @@ class MainContent extends Component {
   }
 
   onNoteAddSubmit () {
+    const {
+      match: {
+        params: {
+          category
+        }
+      }
+    } = this.props
     let content = this.state.inputValue
-    let category = this.props.selectedCategory
     this.props.dispatch({
       type: 'NOTE_ADDED',
       payload: {content, category}
@@ -34,11 +43,23 @@ class MainContent extends Component {
   }
 
   _getNotes () {
-    if (!this.props.notes) {
+    const {
+      match: {
+        params: {
+          category
+        }
+      },
+      notes
+    } = this.props
+    if (!notes) {
       return
     }
+    const categories = getCategoryById()
     return this.props.notes
-    .filter(v => this.props.selectedCategory === 1 || (v.category === this.props.selectedCategory))
+    .filter(v => (
+      category === CONSTANTS.DEFAULT_CATEGORY_NAME ||
+      categories[v.category].label === category
+    ))
     .map(v => {
       return (<Note content={v.content} key={v.id} />)
     })
@@ -58,9 +79,8 @@ class MainContent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    notes: state.notes,
-    selectedCategory: state.selectedCategory
+    notes: state.notes
   }
 }
 
-export default connect(mapStateToProps)(MainContent)
+export default createRoutedComponent(connect(mapStateToProps)(MainContent))

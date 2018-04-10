@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'scripts/components/Button'
+import {Link} from 'react-router-dom'
+import createRoutedComponent from 'scripts/services/RoutingHoc'
 
 function _normaliseInput (value) {
   if (value) {
@@ -18,18 +20,29 @@ class Sidebar extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.onCategorySubmit = this.onCategorySubmit.bind(this)
-    this.onCategoryChange = this.onCategoryChange.bind(this)
   }
 
-  getCategories ({categories, selectedCategory}) {
+  getCategories () {
+    const {
+      categories,
+      match: {
+        params: {
+          category: selectedCategory
+        }
+      }
+    } = this.props
     return categories && categories.map((v) => {
       return (
-        <li
+        <Link
+          to={v.label}
           key={v.id}
-          className={`category-item ${(v.id === selectedCategory ? 'selected' : '')}`}
-          onClick={() => this.onCategoryChange(v)}>
-          {v.label}
-        </li>
+        >
+          <li
+            className={`category-item ${(v.label === selectedCategory ? 'selected' : '')}`}
+          >
+            {v.label}
+          </li>
+        </Link>
       )
     })
   }
@@ -38,13 +51,6 @@ class Sidebar extends Component {
     let inputValue = _normaliseInput(e.target.value)
     this.setState({
       inputValue
-    })
-  }
-
-  onCategoryChange (category) {
-    this.props.dispatch({
-      type: 'CATEGORY_CHANGED',
-      payload: category
     })
   }
 
@@ -68,7 +74,7 @@ class Sidebar extends Component {
           <Button text='Submit' onClick={this.onCategorySubmit} />
         </div>
         <ul className='category-list'>
-          {this.getCategories(this.props)}
+          {this.getCategories()}
         </ul>
       </div>
     )
@@ -82,4 +88,4 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Sidebar)
+export default createRoutedComponent(connect(mapStateToProps)(Sidebar))
