@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'scripts/components/Button'
 import Note from 'scripts/components/Note'
-import { getCategoryById } from 'scripts/services//utilService'
+import { getCategoryByName } from 'scripts/services//utilService'
 import CONSTANTS from 'scripts/constants'
 import createRoutedComponent from 'scripts/services/RoutingHoc'
 
@@ -23,7 +23,8 @@ class MainContent extends Component {
     })
   }
 
-  onNoteAddSubmit () {
+  onNoteAddSubmit (e) {
+    e.preventDefault()
     const {
       match: {
         params: {
@@ -54,7 +55,7 @@ class MainContent extends Component {
     if (!notes) {
       return
     }
-    const categories = getCategoryById()
+    const categories = getCategoryByName()
     return this.props.notes
     .filter(v => (
       category === CONSTANTS.DEFAULT_CATEGORY_NAME ||
@@ -68,10 +69,10 @@ class MainContent extends Component {
   render () {
     return (<div>
     Note
-    <div className='notes-input'>
+    <form className='notes-input' onSubmit={this.onNoteAddSubmit}>
       <textarea type='text' onChange={this.handleChange} value={this.state.inputValue} />
       <Button text='Submit' onClick={this.onNoteAddSubmit} />
-    </div>
+    </form>
       {this._getNotes()}
     </div>)
   }

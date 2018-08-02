@@ -1,34 +1,34 @@
 #!/usr/bin/env node
-let webpack = require('webpack');
-let webpackDevServer = require('webpack-dev-server');
-let webpackConfig = require("../webpack.config.js");
+let webpack = require('webpack')
+let webpackDevServer = require('webpack-dev-server')
+let webpackConfig = require('../webpack.config.js')
 
-let port = process.env.PORT || 8000;
-let host = process.env.HOST || 'keep-react.local.com';
+let port = process.env.PORT || 8000
+let host = process.env.HOST || 'localhost'
 
 webpackConfig.devtool = 'inline-source-map'
 webpackConfig.plugins = [...webpackConfig.plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()]
 const options = {
-	hot: true,
-	host,
-	quiet: false,
-	noInfo: false,
-	lazy: false,
-	stats: {
-		assets: true,
-		colors: true,
-		version: true,
-		hash: true,
-		timings: true,
-		chunks: false,
-		chunkModules: false
-	}
-};
-webpackDevServer.addDevServerEntrypoints(webpackConfig, options);
+  hot: true,
+  host,
+  quiet: false,
+  noInfo: false,
+  lazy: false,
+  stats: {
+    assets: true,
+    colors: true,
+    version: true,
+    hash: true,
+    timings: true,
+    chunks: false,
+    chunkModules: false
+  }
+}
+webpackDevServer.addDevServerEntrypoints(webpackConfig, options)
 
-let compiler = webpack(webpackConfig);
-let server = new webpackDevServer(compiler, options);
+let compiler = webpack(webpackConfig)
+let server = new webpackDevServer(compiler, options)
 
 server.listen(port, host, () => {
-	console.log(`webpack server started on ${port}`);
+  console.log(`webpack server started on ${port}`)
 })

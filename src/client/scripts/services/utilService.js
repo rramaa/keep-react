@@ -23,6 +23,14 @@ export function getCategoryById () {
   }, [])
 }
 
+export function getCategoryByName () {
+  return getCategories()
+  .reduce((map, v) => {
+    map[v.label] = v
+    return map
+  }, [])
+}
+
 export function noop (data) {
   return data
 }

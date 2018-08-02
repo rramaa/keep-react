@@ -54,7 +54,8 @@ class Sidebar extends Component {
     })
   }
 
-  onCategorySubmit () {
+  onCategorySubmit (e) {
+    e.preventDefault()
     let label = this.state.inputValue
     this.props.dispatch({
       type: 'CATEGORY_ADDED',
@@ -69,10 +70,10 @@ class Sidebar extends Component {
     return (
       <div>
         Categories
-        <div className='category-input'>
+        <form className='category-input' onSubmit={this.onCategorySubmit}>
           <input type='text' onChange={this.handleChange} value={this.state.inputValue} />
           <Button text='Submit' onClick={this.onCategorySubmit} />
-        </div>
+        </form>
         <ul className='category-list'>
           {this.getCategories()}
         </ul>

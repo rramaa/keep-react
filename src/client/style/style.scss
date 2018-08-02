@@ -1,2 +1,9 @@
 @import "./sidebar";
 @import "./main-content";
+
+a {
+    text-decoration: none;
+    &:visited, &:hover {
+        color: black;
+    }
+}
